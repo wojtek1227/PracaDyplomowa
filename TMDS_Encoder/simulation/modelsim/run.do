@@ -17,6 +17,5 @@ add wave -noupdate /tb_tmds_encoder/uut/c1c0
 add wave -noupdate /tb_tmds_encoder/uut/data_in
 add wave -noupdate /tb_tmds_encoder/uut/data_out
 add wave -noupdate /tb_tmds_encoder/uut/load_to_serial
-add wave -noupdate /tb_tmds_encoder/uut/d_int
 
 run -all
