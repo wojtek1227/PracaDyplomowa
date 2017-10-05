@@ -36,7 +36,7 @@ architecture tb_architecture of tb_tmds_encoder is
 	
 	-- constants and simulation signals
 	constant clk_period : time := 20 ns;
-	constant number_of_test : integer := 10000;
+	constant number_of_test : integer := 5000;
 	signal end_sim: boolean := false;
 	
 	--stimulus signals
@@ -100,17 +100,18 @@ begin
 				write(my_line,now);
 				writeline(output, my_line);
 			end if;
-			writeline(output, my_line);
-			write(my_line, string'("Passed "));
-			write(my_line, passed_tests);
-			write(my_line, string'(" tests out of "));
-			write(my_line, number_of_test);
-			writeline(output, my_line);
 			
 			wait for clk_period / 2;
 			tested_data := tested_data + "1";
 		end loop;
 
+		writeline(output, my_line);
+		write(my_line, string'("Passed "));
+		write(my_line, passed_tests);
+		write(my_line, string'(" tests out of "));
+		write(my_line, number_of_test);
+		writeline(output, my_line);
+		
 		wait for 500 ns;
 		end_sim <= true;
 	wait;                                                        
