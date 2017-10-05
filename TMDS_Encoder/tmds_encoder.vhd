@@ -29,8 +29,7 @@ entity tmds_encoder is
 		de		:	in std_logic;
 		c1c0	:	in std_logic_vector(1 downto 0);
 		data_in	:	in std_logic_vector(7 downto 0);
-		data_out	:	out std_logic_vector(9 downto 0);
-		load_to_serial	:	out std_logic
+		data_out	:	out std_logic_vector(9 downto 0)
 	);
 end tmds_encoder;
 
@@ -73,7 +72,6 @@ begin
 	begin
 		if rst = '1' then
 			q_out <= (others => '0');
-			load_to_serial <= '0';
 		elsif rising_edge(clk) then
 			if ce = '1' then
 				if de = '1' then
@@ -108,7 +106,6 @@ begin
 						when others => null;
 					end case;
 				end if;
-				load_to_serial <= '1';
 			end if;
 		end if;
 	
