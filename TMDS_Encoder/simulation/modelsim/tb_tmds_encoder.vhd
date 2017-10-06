@@ -36,7 +36,7 @@ architecture tb_architecture of tb_tmds_encoder is
 	
 	-- constants and simulation signals
 	constant clk_period : time := 20 ns;
-	constant number_of_test : integer := 5000;
+	constant number_of_test : integer := 5000000;
 	signal end_sim: boolean := false;
 	
 	--stimulus signals
