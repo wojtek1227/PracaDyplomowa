@@ -12,17 +12,16 @@ add wave -noupdate /tb_cam_memory/uut/rst
 add wave -noupdate /tb_cam_memory/uut/clk
 add wave -noupdate /tb_cam_memory/uut/ce
 
-add wave -noupdate /tb_cam_memory/uut/write_enable
-add wave -noupdate -radix hex /tb_cam_memory/uut/write_data
-add wave -noupdate -radix hex /tb_cam_memory/uut/write_addr
+add wave -noupdate /tb_cam_memory/uut/we
+add wave -noupdate -radix hex /tb_cam_memory/uut/wdata
+add wave -noupdate -radix hex /tb_cam_memory/uut/waddr
 
 add wave -noupdate -radix hex /tb_cam_memory/uut/match_data
 add wave -noupdate /tb_cam_memory/uut/match_hit
 add wave -noupdate -radix hex /tb_cam_memory/uut/match_addr
 
-add wave -noupdate -radix hex /tb_cam_memory/uut/content_memory
-add wave -noupdate /tb_cam_memory/uut/line__49/w_addr
-add wave -noupdate /tb_cam_memory/uut/line__49/hit_addr
+add wave -noupdate -radix hex /tb_cam_memory/uut/ram
+
 run -all
 
 
