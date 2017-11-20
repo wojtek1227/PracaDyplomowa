@@ -1,7 +1,7 @@
 
 -------------------------------------------------------------------------------
 --
--- Title       : Hdmi_controller
+-- Title       : hdmi_controller
 -- Design      : HDMI_Module
 -- Author      : Wojciech Caputa
 --
@@ -14,7 +14,7 @@
 library ieee;
 use ieee.numeric_std.all;
 use ieee.std_logic_1164.all;
-use ieee.std_logic_unsigned.all;
+--use ieee.std_logic_unsigned.all;
 
 
 entity hdmi_controller is
@@ -31,6 +31,11 @@ entity hdmi_controller is
 		const_v_front : integer := 10;
 		const_v_sync : integer := 2;
 		const_v_blank : integer := 45;
+		
+		active_hsync : std_logic := '0';
+		blank_hsync : std_logic := '1';
+		active_vsync : std_logic := '0';
+		blank_vsync : std_logic := '1';
 		
 		serializer_clk_delay : integer := 2
 	);
