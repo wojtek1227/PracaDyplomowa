@@ -98,10 +98,10 @@ begin
 					--control period
 					cnt <= 0;
 					case c1c0 is
-						when "00" => q_out <= B"00_1010_1011";
-						when "01" => q_out <= B"11_0101_0100";
-						when "10" => q_out <= B"00_1010_1010";
-						when "11" => q_out <= B"11_0101_0101";
+						when "00" => q_out <= B"11_0101_0100";
+						when "01" => q_out <= B"00_1010_1011";
+						when "10" => q_out <= B"01_0101_0100";
+						when "11" => q_out <= B"10_1010_1011";
 						when others => null;
 					end case;
 				end if;

@@ -14,7 +14,6 @@
 library ieee;
 use ieee.numeric_std.all;
 use ieee.std_logic_1164.all;
---use ieee.std_logic_unsigned.all;
 
 
 entity hdmi_controller is
@@ -51,7 +50,6 @@ entity hdmi_controller is
 		out_vde : out std_logic;									--video data enable, required by T.M.D.S encoder
 		out_hsync : out std_logic;									--horizontal synchronization
 		out_vsync : out std_logic;									--vertical synchronization
---		tmds_ce : out std_logic;									--T.M.D.S encoder clock enable
 		out_vram_address : out std_logic_vector(vram_addr_width - 1 downto 0) --Pixel position format: (y,x) x and y are 16bits long
 	);
 end hdmi_controller;
@@ -61,7 +59,7 @@ architecture behavioral of hdmi_controller is
 	signal vde : std_logic;
 	signal hsync : std_logic;
 	signal vsync : std_logic;
---	signal vram_addr : unsigned(50 downto 0) := (others => '0');
+	signal vram_addr : unsigned(vram_addr_width - 1 downto 0) := (others => '0');
 
 begin
 	
@@ -69,7 +67,7 @@ controller : process(rst, clk)
 	
 	variable counterx : unsigned (15 downto 0) := (others => '0');
 	variable countery : unsigned (15 downto 0) := (others => '0');
-	variable vram_addr : unsigned(vram_addr_width - 1 downto 0) := (others => '0');
+	
 
 	begin
 		if rst = '1' then
@@ -78,7 +76,7 @@ controller : process(rst, clk)
 			vsync <= inactive_vsync;
 			counterx := (others => '0');
 			countery := (others => '0');
-			vram_addr := (others => '0');
+			vram_addr <= (others => '0');
 			--rst
 		elsif rising_edge(clk) then
 			if ce = '1' then
@@ -115,32 +113,28 @@ controller : process(rst, clk)
 				
 				if vde = '1' then
 					if vram_addr = (640 * 480 - 1) then
-						vram_addr := (others => '0');
+						vram_addr <= (others => '0');
 					else
-						vram_addr := vram_addr + 1;
+						vram_addr <= vram_addr + 1;
 					end if;
 				end if;
 				
 			end if;
 		end if;
-		out_vram_address <= std_logic_vector(vram_addr);
+		
 	end process;
---	
---	out_vde <= vde;
---	out_hsync <= hsync;
---	out_vsync <= vsync;
---	
+	
+	
+	
 delay : process(clk)
 	
 	begin
 		if rising_edge(clk) then
+			out_vram_address <= std_logic_vector(vram_addr);
 			out_vde <= vde;
 			out_hsync <= hsync;
 			out_vsync <= vsync;
 		end if;
 	end process;
-	
-	
---	vram_s1_address <= std_logic_vector(vram_addr);
-	
+		
 end behavioral;
