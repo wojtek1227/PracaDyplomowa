@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 --
 -- Title       : tmds_encoder
--- Design      : T.M.D.S encoder
+-- Design      : HDMI_Module
 -- Author      : Wojciech Caputa
 --
 -------------------------------------------------------------------------------
@@ -16,7 +16,6 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
-use ieee.std_logic_unsigned.all;
 
 use work.fun_pkg.all;
 

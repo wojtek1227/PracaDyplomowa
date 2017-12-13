@@ -17,3 +17,4 @@
 /Hdmi_Module/PISO/output_files
 *.vwf
 *.cmp
+/Hdmi_Module/CAM/simulation/modelsim/rtl_work

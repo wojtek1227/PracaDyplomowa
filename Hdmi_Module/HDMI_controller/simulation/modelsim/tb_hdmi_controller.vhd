@@ -21,14 +21,13 @@ architecture tb_architecture of tb_hdmi_controller is
 			out_hsync : out std_logic;
 			out_vsync : out std_logic;
 			tmds_ce : out std_logic;
-			out_serializer_ce : out std_logic;
-			pixel_position : out std_logic_vector(31 downto 0)
+			vram_s1_address : out std_logic_vector(50 downto 0)
 		);
 	end component;
 	
 	-- constants
 	constant clk_period : time := 10 ns;
-	constant frames : integer := 3;
+	constant frames : integer := 5;
 	
 	--stimulus signals
 	signal rst : std_logic;
@@ -40,9 +39,11 @@ architecture tb_architecture of tb_hdmi_controller is
 	signal out_hsync : std_logic;
 	signal out_vsync : std_logic;
 	signal tmds_ce : std_logic;
-	signal out_serializer_ce : std_logic;
-	signal pixel_position : std_logic_vector(31 downto 0);
+	signal vram_s1_address : std_logic_vector(50 downto 0);
 	
+	--
+	
+	signal vram_s1_readdata : std_logic_vector(7 downto 0);
 	--
 	signal end_sim: boolean := false;
 	
@@ -62,10 +63,9 @@ begin
 			out_hsync => out_hsync,
 			out_vsync => out_vsync,
 			tmds_ce => tmds_ce,
-			out_serializer_ce => out_serializer_ce,
-			pixel_position => pixel_position		
+			vram_s1_address => vram_s1_address	
 		);
-		
+			
 
 	stimulus : process 
 

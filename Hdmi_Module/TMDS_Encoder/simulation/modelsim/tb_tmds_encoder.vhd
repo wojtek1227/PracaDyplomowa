@@ -30,7 +30,8 @@ architecture tb_architecture of tb_tmds_encoder is
 			de : in std_logic;
 			c1c0 : in std_logic_vector(1 downto 0);
 			data_in : in std_logic_vector(7 downto 0);
-			data_out : out std_logic_vector(9 downto 0)
+			data_out : out std_logic_vector(9 downto 0);
+			serializer_en	: out std_logic
 		);
 	end component;
 	
@@ -49,6 +50,7 @@ architecture tb_architecture of tb_tmds_encoder is
 	
 	--observed signals
 	signal data_out : std_logic_vector(9 downto 0);
+	signal serializer_en : std_logic;
 	
 begin
 		uut : tmds_encoder
