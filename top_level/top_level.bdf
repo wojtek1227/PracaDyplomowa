@@ -1,0 +1,193 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Intel and sold by Intel or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+*/
+(header "graphic" (version "1.4"))
+(pin
+	(input)
+	(rect -168 176 0 192)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "clk" (rect 5 0 20 12)(font "Arial" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+)
+(pin
+	(output)
+	(rect 104 336 280 352)
+	(text "OUTPUT" (rect 137 0 175 10)(font "Arial" (font_size 6)))
+	(text "led_export[3..0]" (rect 5 0 80 17)(font "Intel Clear" ))
+	(pt 176 8)
+	(drawing
+		(line (pt 176 8)(pt 124 8))
+		(line (pt 124 4)(pt 98 4))
+		(line (pt 124 12)(pt 98 12))
+		(line (pt 124 12)(pt 124 4))
+		(line (pt 98 4)(pt 94 8))
+		(line (pt 94 8)(pt 98 12))
+		(line (pt 98 12)(pt 94 8))
+	)
+	(flipy)
+)
+(symbol
+	(rect 16 120 272 304)
+	(text "pll" (rect 122 0 137 16)(font "Arial" (font_size 10)))
+	(text "inst1" (rect 8 168 30 185)(font "Intel Clear" ))
+	(port
+		(pt 0 64)
+		(input)
+		(text "inclk0" (rect 0 0 31 14)(font "Arial" (font_size 8)))
+		(text "inclk0" (rect 4 50 35 64)(font "Arial" (font_size 8)))
+		(line (pt 0 64)(pt 40 64))
+	)
+	(port
+		(pt 256 64)
+		(output)
+		(text "c0" (rect 0 0 14 14)(font "Arial" (font_size 8)))
+		(text "c0" (rect 240 50 254 64)(font "Arial" (font_size 8)))
+	)
+	(port
+		(pt 256 80)
+		(output)
+		(text "c1" (rect 0 0 14 14)(font "Arial" (font_size 8)))
+		(text "c1" (rect 240 66 254 80)(font "Arial" (font_size 8)))
+	)
+	(port
+		(pt 256 96)
+		(output)
+		(text "c2" (rect 0 0 14 14)(font "Arial" (font_size 8)))
+		(text "c2" (rect 240 82 254 96)(font "Arial" (font_size 8)))
+	)
+	(port
+		(pt 256 112)
+		(output)
+		(text "locked" (rect 0 0 36 14)(font "Arial" (font_size 8)))
+		(text "locked" (rect 221 98 257 112)(font "Arial" (font_size 8)))
+	)
+	(drawing
+		(text "MAX 10" (rect 218 168 254 180)(font "Arial" ))
+		(text "inclk0 frequency: 10.000 MHz" (rect 50 59 197 71)(font "Arial" ))
+		(text "Operation Mode: Normal" (rect 50 72 169 84)(font "Arial" ))
+		(text "Clk " (rect 51 93 71 105)(font "Arial" ))
+		(text "Ratio" (rect 72 93 97 105)(font "Arial" ))
+		(text "Ph (dg)" (rect 98 93 133 105)(font "Arial" ))
+		(text "DC (%)" (rect 132 93 168 105)(font "Arial" ))
+		(text "c0" (rect 54 107 65 119)(font "Arial" ))
+		(text "5/2" (rect 77 107 92 119)(font "Arial" ))
+		(text "0.00" (rect 104 107 125 119)(font "Arial" ))
+		(text "50.00" (rect 136 107 163 119)(font "Arial" ))
+		(text "c1" (rect 54 121 65 133)(font "Arial" ))
+		(text "10/1" (rect 74 121 95 133)(font "Arial" ))
+		(text "0.00" (rect 104 121 125 133)(font "Arial" ))
+		(text "50.00" (rect 136 121 163 133)(font "Arial" ))
+		(text "c2" (rect 54 135 65 147)(font "Arial" ))
+		(text "25/1" (rect 74 135 95 147)(font "Arial" ))
+		(text "0.00" (rect 104 135 125 147)(font "Arial" ))
+		(text "50.00" (rect 136 135 163 147)(font "Arial" ))
+		(line (pt 0 0)(pt 257 0))
+		(line (pt 257 0)(pt 257 185))
+		(line (pt 0 185)(pt 257 185))
+		(line (pt 0 0)(pt 0 185))
+		(line (pt 48 91)(pt 164 91))
+		(line (pt 48 104)(pt 164 104))
+		(line (pt 48 118)(pt 164 118))
+		(line (pt 48 132)(pt 164 132))
+		(line (pt 48 146)(pt 164 146))
+		(line (pt 48 91)(pt 48 146))
+		(line (pt 69 91)(pt 69 146)(line_width 3))
+		(line (pt 95 91)(pt 95 146)(line_width 3))
+		(line (pt 129 91)(pt 129 146)(line_width 3))
+		(line (pt 163 91)(pt 163 146))
+		(line (pt 40 48)(pt 207 48))
+		(line (pt 207 48)(pt 207 167))
+		(line (pt 40 167)(pt 207 167))
+		(line (pt 40 48)(pt 40 167))
+		(line (pt 255 64)(pt 207 64))
+		(line (pt 255 80)(pt 207 80))
+		(line (pt 255 96)(pt 207 96))
+		(line (pt 255 112)(pt 207 112))
+	)
+)
+(symbol
+	(rect 384 232 624 376)
+	(text "nios" (rect 109 -1 137 15)(font "Arial" (font_size 10)))
+	(text "inst" (rect 8 128 25 140)(font "Arial" ))
+	(port
+		(pt 0 72)
+		(input)
+		(text "clk_clk" (rect 0 0 37 14)(font "Arial" (font_size 8)))
+		(text "clk_clk" (rect 4 61 41 75)(font "Arial" (font_size 8)))
+		(line (pt 0 72)(pt 96 72))
+	)
+	(port
+		(pt 0 112)
+		(output)
+		(text "led_export[3..0]" (rect 0 0 88 14)(font "Arial" (font_size 8)))
+		(text "led_export[3..0]" (rect 4 101 92 115)(font "Arial" (font_size 8)))
+		(line (pt 0 112)(pt 96 112)(line_width 3))
+	)
+	(drawing
+		(text "clk" (rect 81 43 98 58)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "clk" (rect 101 67 115 79)(font "Arial" (color 0 0 0)))
+		(text "led" (rect 80 83 100 98)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "export" (rect 101 107 131 119)(font "Arial" (color 0 0 0)))
+		(text " nios " (rect 220 128 247 140)(font "Arial" ))
+		(line (pt 96 32)(pt 144 32))
+		(line (pt 144 32)(pt 144 128))
+		(line (pt 96 128)(pt 144 128))
+		(line (pt 96 32)(pt 96 128))
+		(line (pt 97 52)(pt 97 76))
+		(line (pt 98 52)(pt 98 76))
+		(line (pt 97 92)(pt 97 116))
+		(line (pt 98 92)(pt 98 116))
+		(line (pt 0 0)(pt 240 0))
+		(line (pt 240 0)(pt 240 144))
+		(line (pt 0 144)(pt 240 144))
+		(line (pt 0 0)(pt 0 144))
+	)
+)
+(connector
+	(pt 280 344)
+	(pt 384 344)
+	(bus)
+)
+(connector
+	(pt 16 184)
+	(pt 0 184)
+)
+(connector
+	(pt 272 200)
+	(pt 352 200)
+)
+(connector
+	(pt 352 200)
+	(pt 352 304)
+)
+(connector
+	(pt 384 304)
+	(pt 352 304)
+)

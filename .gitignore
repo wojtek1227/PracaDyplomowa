@@ -18,3 +18,17 @@
 *.vwf
 *.cmp
 /Hdmi_Module/CAM/simulation/modelsim/rtl_work
+/top_level/software/nios_bsp/obj
+/top_level/software/nios_bsp/HAL
+/top_level/software/nios_bsp/drivers
+/top_level/software/nios_bsp/.settings
+/top_level/software/nios_bsp
+/top_level/software/nios/create-this-app
+/top_level/software/nios/Makefile
+/top_level/software/nios/nios.elf
+/top_level/software/nios/nios.map
+/top_level/software/nios/nios.objdump
+/top_level/software/nios/obj
+/top_level/software/nios/.settings
+/top_level/software/nios/mem_init
+/top_level/software/nios/system
