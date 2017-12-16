@@ -97,15 +97,21 @@ int main()
 	init_uart();
 	init_timers();
 	uint32_t czas = get_time();
+	uint32_t i = 0;
+	volatile uint8_t* vram;
+	vram = VRAM_BASE;
 	IOWR_ALTERA_AVALON_PIO_DATA(PIO_0_BASE,  0x0f);
 	/* Event loop never exits. */
+
 	while (1)
 	{
-		if ((get_time() - czas) >= 1000)
-		{
+//		if ((get_time() - czas) >= 10)
+//		{
+			*(vram + i) = 0x01;
 			IOWR_ALTERA_AVALON_PIO_DATA(PIO_0_BASE, IORD_ALTERA_AVALON_PIO_DATA(PIO_0_BASE) ^ (1<<2));
+			i++;
 			czas = get_time();
-		}
+//		}
 	}
 
 	return 0;
