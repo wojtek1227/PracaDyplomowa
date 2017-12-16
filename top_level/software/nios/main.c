@@ -78,10 +78,14 @@
  *
  */
 
+#include "system.h"
 #include "sys/alt_stdio.h"
 #include "sys/alt_irq.h"
 #include "altera_avalon_pio_regs.h"
 #include "altera_avalon_timer_regs.h"
+#include "altera_avalon_uart_regs.h"
+
+#include "buttons/buttons.h"
 
 void init_system(void);
 
@@ -93,7 +97,24 @@ static void isr_timer0()
 	IOWR_ALTERA_AVALON_TIMER_STATUS(TIMER_0_BASE, 0);
 	counter^= (int)0x01;
 //	counter++;
+//	if(IORD_ALTERA_AVALON_UART_STATUS(UART_BASE) & ALTERA_AVALON_UART_STATUS_TRDY_MSK)
+//	{
+//		IOWR_ALTERA_AVALON_UART_TXDATA(UART_BASE,0x66);
+//	}
 }
+
+static void isr_uart()
+{
+	static int counter = 2;
+	volatile alt_8 data;
+	if(IORD_ALTERA_AVALON_UART_STATUS(UART_BASE) & ALTERA_AVALON_UART_STATUS_RRDY_MSK)
+	{
+		data = IORD_ALTERA_AVALON_UART_RXDATA(UART_BASE);
+		IOWR_ALTERA_AVALON_PIO_DATA(PIO_0_BASE, counter);
+		counter^= (int)0x02;
+	}
+}
+
 
 int main()
 { 
@@ -109,10 +130,16 @@ int main()
 
 void init_system(void)
 {
+	//Timer initialization
 	IOWR_ALTERA_AVALON_TIMER_CONTROL(TIMER_0_BASE,
 									ALTERA_AVALON_TIMER_CONTROL_START_MSK |
 									ALTERA_AVALON_TIMER_CONTROL_CONT_MSK |
 									ALTERA_AVALON_TIMER_CONTROL_ITO_MSK);
 	alt_ic_isr_register(TIMER_0_IRQ_INTERRUPT_CONTROLLER_ID, TIMER_0_IRQ, isr_timer0, NULL, 0);
-	alt_ic_irq_enable(0,0);
+	alt_ic_irq_enable(TIMER_0_IRQ_INTERRUPT_CONTROLLER_ID, TIMER_0_IRQ);
+
+	//UART initialization
+	IOWR_ALTERA_AVALON_UART_CONTROL(UART_BASE, ALTERA_AVALON_UART_CONTROL_RRDY_MSK);
+	alt_ic_isr_register(UART_IRQ_INTERRUPT_CONTROLLER_ID, UART_IRQ, isr_uart, NULL, 0);
+	alt_ic_irq_enable(UART_IRQ_INTERRUPT_CONTROLLER_ID, UART_IRQ);
 }
