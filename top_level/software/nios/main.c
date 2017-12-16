@@ -86,59 +86,28 @@
 #include "altera_avalon_uart_regs.h"
 
 #include "buttons/buttons.h"
+#include "timers/timers.h"
+#include "uart/uart.h"
 
-void init_system(void);
-
-static void isr_timer0()
-{
-	static int counter = 1;
-	IOWR_ALTERA_AVALON_PIO_DATA(PIO_0_BASE, IORD_ALTERA_AVALON_PIO_DATA(PIO_0_BASE) ^ (1<<0));
-//	IOWR_ALTERA_AVALON_PIO_SET_BITS(PIO_0_BASE,counter);
-	IOWR_ALTERA_AVALON_TIMER_STATUS(TIMER_0_BASE, 0);
-	counter^= (int)0x01;
-//	counter++;
-//	if(IORD_ALTERA_AVALON_UART_STATUS(UART_BASE) & ALTERA_AVALON_UART_STATUS_TRDY_MSK)
-//	{
-//		IOWR_ALTERA_AVALON_UART_TXDATA(UART_BASE,0x66);
-//	}
-}
-
-static void isr_uart()
-{
-	static int counter = 2;
-	volatile alt_8 data;
-	if(IORD_ALTERA_AVALON_UART_STATUS(UART_BASE) & ALTERA_AVALON_UART_STATUS_RRDY_MSK)
-	{
-		data = IORD_ALTERA_AVALON_UART_RXDATA(UART_BASE);
-		IOWR_ALTERA_AVALON_PIO_DATA(PIO_0_BASE, IORD_ALTERA_AVALON_PIO_DATA(PIO_0_BASE) ^ (1<<1));
-	}
-}
+#include <stdint.h>
 
 
 int main()
 { 
-	init_system();
+	init_uart();
+	init_timers();
+	uint32_t czas = get_time();
+	IOWR_ALTERA_AVALON_PIO_DATA(PIO_0_BASE,  0x0f);
 	/* Event loop never exits. */
 	while (1)
 	{
-
+		if ((get_time() - czas) >= 1000)
+		{
+			IOWR_ALTERA_AVALON_PIO_DATA(PIO_0_BASE, IORD_ALTERA_AVALON_PIO_DATA(PIO_0_BASE) ^ (1<<2));
+			czas = get_time();
+		}
 	}
 
 	return 0;
 }
 
-void init_system(void)
-{
-	//Timer initialization
-	IOWR_ALTERA_AVALON_TIMER_CONTROL(TIMER_0_BASE,
-									ALTERA_AVALON_TIMER_CONTROL_START_MSK |
-									ALTERA_AVALON_TIMER_CONTROL_CONT_MSK |
-									ALTERA_AVALON_TIMER_CONTROL_ITO_MSK);
-	alt_ic_isr_register(TIMER_0_IRQ_INTERRUPT_CONTROLLER_ID, TIMER_0_IRQ, isr_timer0, NULL, 0);
-	alt_ic_irq_enable(TIMER_0_IRQ_INTERRUPT_CONTROLLER_ID, TIMER_0_IRQ);
-
-	//UART initialization
-	IOWR_ALTERA_AVALON_UART_CONTROL(UART_BASE, ALTERA_AVALON_UART_CONTROL_RRDY_MSK);
-	alt_ic_isr_register(UART_IRQ_INTERRUPT_CONTROLLER_ID, UART_IRQ, isr_uart, NULL, 0);
-	alt_ic_irq_enable(UART_IRQ_INTERRUPT_CONTROLLER_ID, UART_IRQ);
-}
