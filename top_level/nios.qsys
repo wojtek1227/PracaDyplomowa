@@ -21,7 +21,7 @@
    {
       datum _sortIndex
       {
-         value = "2";
+         value = "3";
          type = "int";
       }
    }
@@ -37,7 +37,7 @@
    {
       datum _sortIndex
       {
-         value = "1";
+         value = "2";
          type = "int";
       }
    }
@@ -53,7 +53,7 @@
    {
       datum _sortIndex
       {
-         value = "6";
+         value = "7";
          type = "int";
       }
    }
@@ -69,7 +69,7 @@
    {
       datum _sortIndex
       {
-         value = "3";
+         value = "4";
          type = "int";
       }
    }
@@ -81,11 +81,19 @@
          type = "String";
       }
    }
+   element reset_bridge_0
+   {
+      datum _sortIndex
+      {
+         value = "1";
+         type = "int";
+      }
+   }
    element timer_0
    {
       datum _sortIndex
       {
-         value = "4";
+         value = "5";
          type = "int";
       }
    }
@@ -101,7 +109,7 @@
    {
       datum _sortIndex
       {
-         value = "5";
+         value = "6";
          type = "int";
       }
    }
@@ -140,6 +148,7 @@
    internal="pio_0.external_connection"
    type="conduit"
    dir="end" />
+ <interface name="rst" internal="reset_bridge_0.in_reset" type="reset" dir="end" />
  <interface
    name="uart"
    internal="uart.external_connection"
@@ -396,6 +405,17 @@
   <parameter name="useShallowMemBlocks" value="false" />
   <parameter name="writable" value="true" />
  </module>
+ <module
+   name="reset_bridge_0"
+   kind="altera_reset_bridge"
+   version="17.0"
+   enabled="1">
+  <parameter name="ACTIVE_LOW_RESET" value="1" />
+  <parameter name="AUTO_CLK_CLOCK_RATE" value="-1" />
+  <parameter name="NUM_RESET_OUTPUTS" value="1" />
+  <parameter name="SYNCHRONOUS_EDGES" value="none" />
+  <parameter name="USE_RESET_REQUEST" value="0" />
+ </module>
  <module name="timer_0" kind="altera_avalon_timer" version="17.0" enabled="1">
   <parameter name="alwaysRun" value="false" />
   <parameter name="counterSize" value="32" />
@@ -577,6 +597,41 @@
    kind="reset"
    version="17.0"
    start="nios2_gen2_0.debug_reset_request"
+   end="ram.reset1" />
+ <connection
+   kind="reset"
+   version="17.0"
+   start="reset_bridge_0.out_reset"
+   end="clk_0.clk_in_reset" />
+ <connection
+   kind="reset"
+   version="17.0"
+   start="reset_bridge_0.out_reset"
+   end="flash.nreset" />
+ <connection
+   kind="reset"
+   version="17.0"
+   start="reset_bridge_0.out_reset"
+   end="nios2_gen2_0.reset" />
+ <connection
+   kind="reset"
+   version="17.0"
+   start="reset_bridge_0.out_reset"
+   end="timer_0.reset" />
+ <connection
+   kind="reset"
+   version="17.0"
+   start="reset_bridge_0.out_reset"
+   end="uart.reset" />
+ <connection
+   kind="reset"
+   version="17.0"
+   start="reset_bridge_0.out_reset"
+   end="pio_0.reset" />
+ <connection
+   kind="reset"
+   version="17.0"
+   start="reset_bridge_0.out_reset"
    end="ram.reset1" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.enableEccProtection" value="FALSE" />
