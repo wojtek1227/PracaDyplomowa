@@ -90,6 +90,10 @@
 #include "uart/uart.h"
 
 #include <stdint.h>
+#include <string.h>
+
+#include "drawing/drawing.h"
+#include "game/game.h"
 
 
 int main()
@@ -98,19 +102,22 @@ int main()
 	init_timers();
 	uint32_t czas = get_time();
 	uint32_t i = 0;
+	uint32_t j = 0;
 	volatile uint8_t* vram;
 	vram = VRAM_BASE;
 	IOWR_ALTERA_AVALON_PIO_DATA(PIO_0_BASE,  0x0f);
 	/* Event loop never exits. */
+	memset((uint8_t*)VRAM_BASE, 0, 640);
+	game_run();
 
 	while (1)
 	{
-//		if ((get_time() - czas) >= 10)
+//		if ((get_time() - czas) >= 500)
 //		{
-			*(vram + i) = 0x01;
-			IOWR_ALTERA_AVALON_PIO_DATA(PIO_0_BASE, IORD_ALTERA_AVALON_PIO_DATA(PIO_0_BASE) ^ (1<<2));
-			i++;
-			czas = get_time();
+//			czas = get_time();
+//			*((uint8_t*)VRAM_BASE + j) |= (1<<i);
+//			i++;
+//			i%=8;
 //		}
 	}
 

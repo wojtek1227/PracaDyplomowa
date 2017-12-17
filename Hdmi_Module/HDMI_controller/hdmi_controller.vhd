@@ -124,13 +124,13 @@ controller : process(rst, clk)
 		
 	end process;
 	
-	
+	out_vram_address <= std_logic_vector(vram_addr);
 	
 delay : process(clk)
 	
 	begin
 		if rising_edge(clk) then
-			out_vram_address <= std_logic_vector(vram_addr);
+			
 			out_vde <= vde;
 			out_hsync <= hsync;
 			out_vsync <= vsync;
