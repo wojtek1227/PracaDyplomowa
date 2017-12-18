@@ -120,7 +120,7 @@ void draw_alien1(uint16_t x, uint16_t y)
 	}
 }
 
-void clear_object(uint16_t x, uint16_t y, uint8_t x_size, uint8_t y_size)
+void erese_object(uint16_t x, uint16_t y, uint8_t x_size, uint8_t y_size)
 {
 	for(uint8_t i = 0; i < y_size; i++)
 	{
@@ -128,5 +128,12 @@ void clear_object(uint16_t x, uint16_t y, uint8_t x_size, uint8_t y_size)
 		{
 			*((uint8_t*)VRAM_BASE + (y + i) * MAX_X + x + j) = 0x00;
 		}
+	}
+}
+void clear_screen(void)
+{
+	for(uint32_t i = 0; i < VRAM_SIZE_VALUE; i++)
+	{
+		*((uint8_t*)VRAM_BASE + i) = 0x00;
 	}
 }

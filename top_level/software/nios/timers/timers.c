@@ -9,18 +9,28 @@
 
 volatile static uint32_t time_ms;
 
+volatile uint8_t left_button;
+volatile uint8_t right_button;
+volatile uint8_t shoot_button;
+
 static void isr_timer0()
 {
 	time_ms++;
-	IOWR_ALTERA_AVALON_PIO_DATA(PIO_0_BASE, IORD_ALTERA_AVALON_PIO_DATA(PIO_0_BASE) ^ (1<<0));
 	IOWR_ALTERA_AVALON_TIMER_STATUS(TIMER_0_BASE, ALTERA_AVALON_TIMER_STATUS_TO_MSK);
 
 }
 
 static void isr_timer1()
 {
-//	IOWR_ALTERA_AVALON_PIO_DATA(PIO_0_BASE, 4);
-	IOWR_ALTERA_AVALON_PIO_DATA(PIO_0_BASE, IORD_ALTERA_AVALON_PIO_DATA(PIO_0_BASE) ^ (1<<1));
+
+//	shoot_button = !(IORD_ALTERA_AVALON_PIO_DATA(PIO_1_BASE) & (1 << 0));
+	shoot_button = (IORD_ALTERA_AVALON_PIO_DATA(PIO_1_BASE) & (1 << 0)) ? 0 : 1;
+	if (!(IORD_ALTERA_AVALON_PIO_DATA(PIO_1_BASE) & (1 << 2)))
+	{
+
+	}
+	left_button = !(IORD_ALTERA_AVALON_PIO_DATA(PIO_1_BASE) & (1 << 2));
+	right_button = !(IORD_ALTERA_AVALON_PIO_DATA(PIO_1_BASE) & (1 << 1));
 	IOWR_ALTERA_AVALON_TIMER_STATUS(TIMER_1_BASE, ALTERA_AVALON_TIMER_STATUS_TO_MSK);
 }
 

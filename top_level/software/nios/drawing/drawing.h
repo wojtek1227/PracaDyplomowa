@@ -44,7 +44,8 @@
 void draw_player(uint16_t x, uint16_t y);
 void draw_alien1(uint16_t x, uint16_t y);
 void draw_shot(uint16_t x, uint16_t y);
-void clear_object(uint16_t x, uint16_t y, uint8_t x_size, uint8_t y_size);
+void erese_object(uint16_t x, uint16_t y, uint8_t x_size, uint8_t y_size);
+void clear_screen(void);
 
 
 #endif /* DRAWING_H_ */

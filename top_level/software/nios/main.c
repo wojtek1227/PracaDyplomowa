@@ -107,11 +107,12 @@ int main()
 	vram = VRAM_BASE;
 	IOWR_ALTERA_AVALON_PIO_DATA(PIO_0_BASE,  0x0f);
 	/* Event loop never exits. */
-	memset((uint8_t*)VRAM_BASE, 0, 640);
-	game_run();
+	clear_screen();
+
 
 	while (1)
 	{
+		game_run();
 //		if ((get_time() - czas) >= 500)
 //		{
 //			czas = get_time();

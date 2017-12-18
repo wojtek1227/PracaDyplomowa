@@ -9,6 +9,7 @@
 #define TIMER_H_
 
 #include <stdint.h>
+#include <stdbool.h>
 
 #include "system.h"
 #include "sys/alt_irq.h"
