@@ -46,12 +46,21 @@ static const uint8_t player_pbm[PLAYER_SIZE_Y * PLAYER_SIZE_X] =
 
 static const uint8_t shot_pbm[SHOT_SIZE_Y * SHOT_SIZE_X] =
 {
-		0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000,
-		0b00000000, 0b00000000, 0b00000000, 0b00000011, 0b11000000,
-		0b00000111, 0b11100000, 0b00001111, 0b11110000, 0b00001111,
-		0b11110000, 0b00001111, 0b11110000, 0b00001111, 0b11110000,
-		0b00000111, 0b11100000, 0b00000011, 0b11000000, 0b00000000,
-		0b00000000, 0b00000000, 0b00000000, 0b00000000, 0b00000000,
+		0b00000000, 0b00000000,
+		0b00000000, 0b00000000,
+		0b00000000, 0b00000000,
+		0b00000000, 0b00000000,
+		0b00000011, 0b11000000,
+		0b00000111, 0b11100000,
+		0b00001111, 0b11110000,
+		0b00001111, 0b11110000,
+		0b00001111, 0b11110000,
+		0b00001111, 0b11110000,
+		0b00000111, 0b11100000,
+		0b00000011, 0b11000000,
+		0b00000000, 0b00000000,
+		0b00000000, 0b00000000,
+		0b00000000, 0b00000000,
 		0b00000000, 0b00000000
 };
 
@@ -120,13 +129,30 @@ void draw_alien1(uint16_t x, uint16_t y)
 	}
 }
 
-void erese_object(uint16_t x, uint16_t y, uint8_t x_size, uint8_t y_size)
+void draw_shot(uint16_t x, uint16_t y)
 {
-	for(uint8_t i = 0; i < y_size; i++)
+	if ((x > 0) && (x < MAX_X - SHOT_SIZE_X) && (y > 0) && (y < MAX_Y - SHOT_SIZE_Y))
 	{
-		for(uint8_t j = 0; j < x_size; j++)
+		for(uint8_t i = 0; i < SHOT_SIZE_Y; i++)
 		{
-			*((uint8_t*)VRAM_BASE + (y + i) * MAX_X + x + j) = 0x00;
+			for(uint8_t j = 0; j < SHOT_SIZE_X; j++)
+			{
+				*((uint8_t*)VRAM_BASE + (y + i) * MAX_X + x + j) = shot_pbm[i * SHOT_SIZE_X + 1 - j];
+			}
+		}
+	}
+}
+
+void erase_draw(uint16_t x, uint16_t y, uint8_t x_size, uint8_t y_size)
+{
+	if ((x > 0) && (x < MAX_X - x_size) && (y > 0) && (y < MAX_Y - y_size))
+	{
+		for(uint8_t i = 0; i < y_size; i++)
+		{
+			for(uint8_t j = 0; j < x_size; j++)
+			{
+				*((uint8_t*)VRAM_BASE + (y + i) * MAX_X + x + j) = 0x00;
+			}
 		}
 	}
 }

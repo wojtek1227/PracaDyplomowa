@@ -106,6 +106,7 @@ int main()
 	volatile uint8_t* vram;
 	vram = VRAM_BASE;
 	IOWR_ALTERA_AVALON_PIO_DATA(PIO_0_BASE,  0x0f);
+	IOWR_ALTERA_AVALON_PIO_DATA(PIO_0_BASE, 0xfe);
 	/* Event loop never exits. */
 	clear_screen();
 
