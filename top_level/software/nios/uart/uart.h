@@ -18,6 +18,7 @@
 
 
 void init_uart(void);
+void uart_send_char(uint8_t data);
 
 
 #endif /* UART_H_ */

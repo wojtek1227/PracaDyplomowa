@@ -28,23 +28,24 @@
 #define ALIEN1_SIZE_X 4
 #define ALIEN1_SIZE_Y 32
 
-//typedef enum Color_t
-//{
-//	black = 0xff,
-//	white = 0x00
-//}Color_t;
+#define LETTER_SIZE_X 2
+#define LETTER_SIZE_Y 16
 
-//typedef enum Object_t
-//{
-//	player,
-//	alien1,
-//	shot
-//}Object_t;
+#define NUMBER_SIZE_X 1
+#define NUMBER_SIZE_Y 16
 
-void draw_player(uint16_t x, uint16_t y);
-void draw_alien1(uint16_t x, uint16_t y);
-void draw_shot(uint16_t x, uint16_t y);
-void erase_draw(uint16_t x, uint16_t y, uint8_t x_size, uint8_t y_size);
+typedef enum Object_type
+{
+	player_type,
+	shot_type,
+	alien_type,
+}Object_type;
+
+void draw_object(uint16_t x, uint16_t y, Object_type object_type);
+//void draw_player(uint16_t x, uint16_t y);
+//void draw_alien1(uint16_t x, uint16_t y);
+//void draw_shot(uint16_t x, uint16_t y);
+void erase_draw(uint16_t x, uint16_t y, Object_type object_type);
 void clear_screen(void);
 
 
