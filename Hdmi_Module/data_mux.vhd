@@ -1,3 +1,14 @@
+-------------------------------------------------------------------------------
+--
+-- Title       : data_mux
+-- Design      : HDMI_Module
+-- Author      : Wojciech Caputa
+--
+-------------------------------------------------------------------------------
+--
+-- Description : Module responsible for picking single pixel data from 4 bytes supplied by VRAM
+--
+-------------------------------------------------------------------------------
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

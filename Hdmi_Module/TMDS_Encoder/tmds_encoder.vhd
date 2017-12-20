@@ -22,13 +22,13 @@ use work.fun_pkg.all;
 entity tmds_encoder is
 	port
 	(
-		rst	:	in std_logic;
-		clk	: 	in std_logic;
-		ce		:	in std_logic;
-		de		:	in std_logic;
-		c1c0	:	in std_logic_vector(1 downto 0);
-		data_in	:	in std_logic_vector(7 downto 0);
-		data_out	:	out std_logic_vector(9 downto 0)
+		rst	:	in std_logic;	--reset
+		clk	: 	in std_logic;	--clock
+		ce		:	in std_logic;	--clock enable
+		de		:	in std_logic;	--data_enable
+		c1c0	:	in std_logic_vector(1 downto 0);		--control signals
+		data_in	:	in std_logic_vector(7 downto 0);		--data_in
+		data_out	:	out std_logic_vector(9 downto 0)		--encoded data out
 	);
 end tmds_encoder;
 
@@ -41,7 +41,7 @@ architecture behavioral of tmds_encoder is
 begin	
 	
 	
-	process(data_in, q_m)
+	transition_minimalization : process(data_in, q_m)
 	begin
 		if (count_ones(data_in) > 4) or (count_ones(data_in) = 4 and (data_in(0) = '0')) then
 			for i in 0 to 8 loop
@@ -66,7 +66,7 @@ begin
 		end if;
 	end process;
 
-	process(rst, clk)
+	counting_parity : process(rst, clk)
 	
 	begin
 		if rst = '1' then

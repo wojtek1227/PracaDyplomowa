@@ -6,7 +6,8 @@
 --
 -------------------------------------------------------------------------------
 --
--- Description : 
+-- Description : Module responsible for serializing data, also this module provides
+--						us differential output
 --
 -------------------------------------------------------------------------------
 
@@ -21,12 +22,12 @@ entity serializer is
 	);
 	port
 	(		
-		rst	:	in std_logic;
-		clk	:	in std_logic;
-		ce	:	in std_logic;
-		data_in	: 	in std_logic_vector(data_width - 1 downto 0);
-		data_out_p	: 	out std_logic;
-		data_out_n	: 	out std_logic
+		rst	:	in std_logic;	--reset
+		clk	:	in std_logic;	--clock
+		ce	:	in std_logic; 		--clock enable
+		data_in	: 	in std_logic_vector(data_width - 1 downto 0); --parallel data in
+		data_out_p	: 	out std_logic; --serial data out positive
+		data_out_n	: 	out std_logic	--serial data out negative
 	);
 end serializer;
 
@@ -37,7 +38,7 @@ architecture behavioral of serializer is
 
 begin
 
-	process(rst, clk)
+	serialization : process(rst, clk)
 	begin
 		if rst = '1' then
 			data <= (others => '0');

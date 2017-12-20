@@ -243,7 +243,7 @@ static void collision_detection(Object* shots, uint8_t number_of_shots, Object* 
 	}
 }
 
-uint8_t count_aliens_left(const Object* aliens, uint8_t number_of_aliens)
+static uint8_t count_aliens_left(const Object* aliens, uint8_t number_of_aliens)
 {
 	uint8_t result =0;
 	for (uint8_t i = 0; i < number_of_aliens; i++)
@@ -317,7 +317,6 @@ void game_run(void)
 			}
 			aliens_alive = count_aliens_left(aliens, number_of_aliens);
 		}
-		uart_send_char('d');
 		while(!(shoot_button_board || shoot_button_uart)){}
 	}
 }

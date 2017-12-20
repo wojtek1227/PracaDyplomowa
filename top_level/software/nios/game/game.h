@@ -13,10 +13,8 @@
 #include "system.h"
 
 #include "../timers/timers.h"
-#include "../buttons/buttons.h"
 #include "../drawing/drawing.h"
 
-void game_init(void);
 void game_run(void);
 
 #endif /* GAME_H_ */

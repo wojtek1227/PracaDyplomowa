@@ -7,7 +7,7 @@
 --
 -------------------------------------------------------------------------------
 --
--- Description :  HDMI control unit
+-- Description :  HDMI control unit responsible for generating control signals for TMDS encoders
 --						
 -------------------------------------------------------------------------------
 
@@ -19,21 +19,21 @@ use ieee.std_logic_1164.all;
 entity hdmi_controller is
 	generic
 	(
-		constant const_h_total 	: integer := 800; 		--all pixels per line, active and blank
+		constant const_h_total 	: integer := 800; 	--all pixels per line, active + blank
 		constant const_h_active : integer := 640;		--active pixels per line
-		constant const_h_front 	: integer := 16;		--
-		constant const_h_sync 	: integer := 96;			--
-		constant const_h_back 	: integer := 48;
-		constant const_h_blank 	: integer := 160;		--
+		constant const_h_front 	: integer := 16;		--horizontal front porch
+		constant const_h_sync 	: integer := 96;		--horizontal sync length
+		constant const_h_back 	: integer := 48;		--horizontal back porch
+		constant const_h_blank 	: integer := 160;		--horizontal blank pixels = hfront + hsync + hback
 
-		constant const_v_total 	: integer := 525;		--n
-		constant const_v_active : integer := 480;
-		constant const_v_front 	: integer := 10;
-		constant const_v_sync 	: integer := 2;
-		constant const_v_back 	: integer := 33;
-		constant const_v_blank 	: integer := 45;
-
-		constant active_hsync 	: std_logic := '0';
+		constant const_v_total 	: integer := 525;		--total number of lines = active_lines + blank_lines
+		constant const_v_active : integer := 480;		--total number of active lines
+		constant const_v_front 	: integer := 10;		--vertical front porch
+		constant const_v_sync 	: integer := 2;		--vertical sync length
+		constant const_v_back 	: integer := 33;		--vertical back porch
+		constant const_v_blank 	: integer := 45;		--vertical blank_lines = vfront + vsync + vback
+		--defines type of synchronization: negative or positive
+		constant active_hsync 	: std_logic := '0';	--
 		constant inactive_hsync : std_logic := '1';
 		constant active_vsync 	: std_logic := '0';
 		constant inactive_vsync : std_logic := '1';
@@ -43,9 +43,9 @@ entity hdmi_controller is
 	);
 	port
 	(
-		rst : in std_logic;
-		clk : in std_logic;
-		ce : in std_logic;
+		rst : in std_logic;	--reset
+		clk : in std_logic;	--clock
+		ce : in std_logic;	--clock enable
 		
 		out_vde : out std_logic;									--video data enable, required by T.M.D.S encoder
 		out_hsync : out std_logic;									--horizontal synchronization
@@ -77,7 +77,6 @@ controller : process(rst, clk)
 			counterx := (others => '0');
 			countery := (others => '0');
 			vram_addr <= (others => '0');
-			--rst
 		elsif rising_edge(clk) then
 			if ce = '1' then
 			

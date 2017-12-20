@@ -1,3 +1,15 @@
+-------------------------------------------------------------------------------
+--
+-- Title       : addres_filter
+-- Design      : HDMI_Module
+-- Author      : Wojciech Caputa
+--
+-------------------------------------------------------------------------------
+--
+-- Description : Module responsible for generating data for pixels from lines over 459,
+--						data for lines below 459 are passed normaly, in other case 0 is passed
+--
+-------------------------------------------------------------------------------
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

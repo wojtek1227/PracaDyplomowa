@@ -12,12 +12,9 @@ extern volatile uint8_t right_button_uart;
 
 static void isr_uart()
 {
-	static uint8_t i;
-	volatile uint8_t data;
 	if(IORD_ALTERA_AVALON_UART_STATUS(UART_BASE) & ALTERA_AVALON_UART_STATUS_RRDY_MSK)
 	{
-		data = IORD_ALTERA_AVALON_UART_RXDATA(UART_BASE);
-		switch (data) {
+		switch (IORD_ALTERA_AVALON_UART_RXDATA(UART_BASE)) {
 			case 'a':
 				left_button_uart = 1;
 				break;
@@ -35,7 +32,6 @@ static void isr_uart()
 				right_button_uart = 0;
 				break;
 		}
-
 	}
 }
 

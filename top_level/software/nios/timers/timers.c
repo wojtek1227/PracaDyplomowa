@@ -9,8 +9,6 @@
 
 volatile static uint32_t time_ms;
 
-
-
 extern volatile uint8_t shoot_button_board;
 extern volatile uint8_t left_button_board;
 extern volatile uint8_t right_button_board;
@@ -25,24 +23,6 @@ static void isr_timer0()
 static void isr_timer1()
 {
 	shoot_button_board = (IORD_ALTERA_AVALON_PIO_DATA(PIO_1_BASE) & (1 << 0)) ? 0 : 1;
-	volatile uint8_t data;
-	data = IORD_ALTERA_AVALON_UART_RXDATA(UART_BASE);
-//	switch (data) {
-//		case 'a':
-//			left_button = 1;
-//			break;
-//		case 'd':
-//			right_button = 1;
-//			break;
-//		case ' ':
-//			shoot_button = 1;
-//			break;
-//		default:
-//			left_button = 0;
-//			right_button = 0;
-//			shoot_button = 0;
-//			break;
-//	}
 	left_button_board = !(IORD_ALTERA_AVALON_PIO_DATA(PIO_1_BASE) & (1 << 2));
 	right_button_board = !(IORD_ALTERA_AVALON_PIO_DATA(PIO_1_BASE) & (1 << 1));
 	IOWR_ALTERA_AVALON_TIMER_STATUS(TIMER_1_BASE, ALTERA_AVALON_TIMER_STATUS_TO_MSK);
